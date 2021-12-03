@@ -678,7 +678,7 @@ func (e *endpoint) handleICMP(pkt *stack.PacketBuffer, hasFragmentHeader bool, r
 		})
 		defer replyPkt.DecRef()
 		icmp := header.ICMPv6(replyPkt.TransportHeader().Push(header.ICMPv6EchoMinimumSize))
-		pkt.TransportProtocolNumber = header.ICMPv6ProtocolNumber
+		replyPkt.TransportProtocolNumber = header.ICMPv6ProtocolNumber
 		copy(icmp, h)
 		icmp.SetType(header.ICMPv6EchoReply)
 		dataRange := replyPkt.Data().AsRange()
